@@ -57,6 +57,9 @@
     },
 
     watch: {
+      activeMultiValue(value) {
+        console.log(value);
+      },
       visible(value) {
         if (value) {
           if (this.multiple) {
@@ -198,9 +201,9 @@
         }
       },
       findParent(item) {
-        if (item.length > 1) {
-          let parentMenuIndex = item.length - 2;
-          let parentValue = item[parentMenuIndex];
+        if (item.path.length > 1) {
+          let parentMenuIndex = item.path.length - 2;
+          let parentValue = item.path[parentMenuIndex];
           return this.activeOptions[parentMenuIndex].find((ele)=> ele.value === parentValue);
         }
       },
@@ -269,6 +272,7 @@
         }
         if (this.multiple) {
           this.$emit('pick', this.activeMultiValue.slice());
+          this.value = this.activeMultiValue.slice();
         } else {
           this.$emit('pick', this.activeValue.slice());
         }
@@ -276,7 +280,7 @@
       handleMenuLeave() {
         this.$emit('menuLeave');
       },
-      activeItem(item, menuIndex, ac) {
+      activeItem(item, menuIndex) {
         if (this.multiple) {
           const len = this.activeOptions.length;
           this.activeValue.splice(menuIndex, len, item.value);
@@ -407,7 +411,7 @@
               }[expandTrigger];
               const triggerHandler = () => {
                 if (this.visible) {
-                  this.activeItem(item, menuIndex, this.activeOptions);
+                  this.activeItem(item, menuIndex);
                   this.$nextTick(() => {
                     // adjust self and next level
                     this.scrollMenu(this.$refs.menus[menuIndex]);

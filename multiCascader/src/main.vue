@@ -395,7 +395,6 @@ export default {
       if (!this.menu) {
         this.initMenu();
       }
-
       this.menu.value = this.currentValue.slice(0);
       this.menu.visible = true;
       this.menu.options = this.options;
