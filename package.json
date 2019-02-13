@@ -1,7 +1,7 @@
 {
   "name": "multi-cascader-base-ele",
   "version": "1.0.0",
-  "description": "",
+  "description": "基于element-ui实现的多选级联组件，完全继承element-ui级联组件功能",
   "main": "dist/index.js",
   "directories": {
     "example": "example"
@@ -11,6 +11,15 @@
     "build": "rm -rf ./dist && cross-env MODE=production webpack --config ./build/webpack.config.prod.js --progress --colors",
     "dev": "rm -rf ./dist && cross-env MODE=development webpack-dev-server --config ./build/webpack.config.dev.js --progress --colors"
   },
+  "keywords": [
+    "eleme",
+    "element-ui",
+    "多选级联",
+    "multiCascader",
+    "cascader",
+    "vue",
+    "components"
+  ],
   "dependencies": {
     "@babel/runtime": "^7.1.5",
     "element-ui": "^2.4.11",
