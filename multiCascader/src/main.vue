@@ -156,6 +156,25 @@ const popperMixin = {
   beforeDestroy: Popper.beforeDestroy
 };
 
+const copyArray = (arr) => {
+  if (!arr || !Array.isArray(arr)) return arr;
+  const result = [];
+  
+  arr.forEach(item => {
+    const itemCopy = {};
+    let configurableProps = Object.keys(item);
+    configurableProps.forEach(prop => {
+      if (Array.isArray(item[prop])) {
+        itemCopy[prop] = copyArray(item[prop]);
+      } else {
+        itemCopy[prop] = item[prop];
+      }
+    });
+    result.push(itemCopy);
+  });
+  return result;
+};
+
 export default {
   name: 'ElMultiCascader',
 
@@ -512,6 +531,7 @@ export default {
     },
     flattenOptions(options, ancestor = []) {
       let flatOptions = [];
+      options = copyArray(options);
       options.forEach((option) => {
         option.path = ancestor.map(ele => ele[this.valueKey]);
         option.path.push(option[this.valueKey]);

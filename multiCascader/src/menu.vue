@@ -2,6 +2,8 @@
   import { isDef } from 'element-ui/src/utils/shared';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
   import { generateId } from 'element-ui/src/utils/util';
+  import ElCheckbox from 'element-ui/packages/checkbox';
+
 
   const copyArray = (arr, props) => {
     if (!arr || !Array.isArray(arr) || !props) return arr;
@@ -58,7 +60,7 @@
 
     watch: {
       activeMultiValue(value) {
-        console.log(value);
+        // console.log(value);
       },
       visible(value) {
         if (value) {
@@ -80,7 +82,9 @@
         }
       }
     },
-
+    components: {
+      ElCheckbox
+    },
     computed: {
       activeOptions: {
         get() {
@@ -138,6 +142,9 @@
         return !source.some((ele, idx) => source[idx] !== target[idx]);
       },
       isItemChecked(item) {
+        if(!item) {
+          return;
+        }
         let isChecked = UNCHECKED;
         if (item.__IS__FLAT__OPTIONS) {
           item.path = item.value;
@@ -224,7 +231,7 @@
       isLeafNode(item) {
         if (item.__IS__FLAT__OPTIONS) {
           return item.isLeafNode;
-        } 
+        }
         return !(Array.isArray(item.children) && item.children.length > 0);
       },
       isNodeCanpush(item) {
@@ -423,7 +430,7 @@
               if (triggerEvent === 'mouseenter' && this.changeOnSelect) {
                 events.on.click = () => {
                   if (this.activeValue.indexOf(item.value) !== -1) {
-                    if(!multiple) {
+                    if (!multiple) {
                       this.$emit('closeInside', true);
                     }
                   }
@@ -573,9 +580,13 @@
   };
 </script>
 
-<style lang="less" scoped>
-  .el-cascader-checkbox {
-    margin: 0;
+<style lang="less">
+.el-cascader-checkbox {
+  margin: 0;
+
+  .el-checkbox__input {
+    padding-right: 10px;
   }
+}
 </style>
 

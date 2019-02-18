@@ -1,1 +1,1 @@
-module.exports = require('./multiCascader/index');
+module.exports = require('./dist/index');

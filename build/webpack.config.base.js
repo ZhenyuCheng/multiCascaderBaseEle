@@ -1,7 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const webpack = require('webpack');
 
 const _ = require('./utils');
 const buildConfig = require('./build.config');
@@ -12,15 +11,20 @@ const {
 
 const mode = MODE || 'development';
 const isDev = mode === 'development';
-
 module.exports = {
     output: {
         publicPath: mode == 'development' ? buildConfig.devAssertPublicPath : './',
-        path: buildConfig.output
+        path: buildConfig.output,
+        libraryExport: 'default',
+        library: 'MultiCascaderBaseEle',
+        libraryTarget: 'commonjs2'
+    },
+    optimization: {
+        minimize: false
     },
     entry: {
         index: [
-            './index.js'
+            './multiCascader/index.js'
         ],
         example: [
             './example/index.js'
@@ -33,8 +37,7 @@ module.exports = {
         }
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.tsx?$/,
                 loader: 'ts-loader',
                 exclude: /node_modules/,
@@ -54,39 +57,63 @@ module.exports = {
                 loader: 'vue-loader',
                 options: {
                     loaders: {
-                        less: [
-                            { loader: 'style-loader' }, 
-                            { loader: 'css-loader' }, 
-                            { loader: 'postcss-loader' }, 
-                            { loader: 'less-loader' },
+                        less: [{
+                                loader: 'style-loader'
+                            },
+                            {
+                                loader: 'css-loader'
+                            },
+                            {
+                                loader: 'postcss-loader'
+                            },
+                            {
+                                loader: 'less-loader'
+                            },
                         ],
-                        js: [{ loader: 'babel-loader' }]
+                        js: [{
+                            loader: 'babel-loader'
+                        }]
                     }
                 }
             },
             {
-                test: /\.css$/, 
-                use: [
-                    { loader: 'style-loader' },
-                    { loader: 'css-loader' },
-                    { loader: 'postcss-loader' }
+                test: /\.css$/,
+                use: [{
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'postcss-loader'
+                    }
                 ]
             },
-            { 
-                test: /\.less$/, 
-                use: [
-                    { loader: 'style-loader' },
-                    { loader: 'css-loader' }, 
-                    { loader: 'less-loader' }
-                ] 
+            {
+                test: /\.less$/,
+                use: [{
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'less-loader'
+                    }
+                ]
             },
-            { 
-                test: /\.(sa|sc)ss$/, 
-                use: [
-                    { loader: 'style-loader' },
-                    { loader: 'css-loader' }, 
-                    { loader: 'sass-loader' }
-                ] 
+            {
+                test: /\.(sa|sc)ss$/,
+                use: [{
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'sass-loader'
+                    }
+                ]
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -120,8 +147,8 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: isDev ? '[name].css' : '[name].[hash].css',
             chunkFilename: isDev ? '[id].css' : '[id].[hash].css'
-        }), 
-        new webpack.HotModuleReplacementPlugin(),
+        }),
+        // new webpack.HotModuleReplacementPlugin(),
 
         new HtmlWebpackPlugin({
             template: _.resolve('./example/index.html'),
