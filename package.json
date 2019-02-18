@@ -1,6 +1,6 @@
 {
   "name": "multi-cascader-base-ele",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "基于element-ui实现的多选级联组件，完全继承element-ui级联组件功能",
   "main": "dist/index.js",
   "directories": {
@@ -11,7 +11,7 @@
     "build:component": "cross-env MODE=production webpack --config ./build/webpack.config.prod.js --progress --colors",
     "build:example": "cross-env MODE=production webpack --config ./build/webpack.config.prod.example.js --progress --colors",
     "build": "rm -rf ./dist && npm run build:example && npm run build:component",
-    "dev": "rm -rf ./dist && cross-env MODE=development webpack-dev-server --config ./build/webpack.config.dev.js --progress --colors"
+    "dev": "cross-env MODE=development webpack-dev-server --config ./build/webpack.config.dev.js --progress --colors"
   },
   "keywords": [
     "eleme",
