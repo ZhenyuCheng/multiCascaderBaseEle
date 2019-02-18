@@ -1,7 +1,10 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const _ = require('./utils');
+const webpack = require('webpack');
+
 const buildConfig = require('./build.config');
 
 const {
@@ -14,17 +17,14 @@ module.exports = {
     output: {
         publicPath: mode == 'development' ? buildConfig.devAssertPublicPath : './',
         path: buildConfig.output,
-        libraryExport: 'default',
-        library: 'MultiCascaderBaseEle',
-        libraryTarget: 'commonjs2'
     },
     optimization: {
         minimize: false
     },
     entry: {
-        index: [
-            './multiCascader/index.js'
-        ],
+        example: [
+            './example/index.js'
+        ]
     },
     resolve: {
         extensions: ['.js', '.ts', '.vue', '.json'],
@@ -139,9 +139,17 @@ module.exports = {
     },
     plugins: [
         new FriendlyErrorsWebpackPlugin(),
+
         new MiniCssExtractPlugin({
             filename: isDev ? '[name].css' : '[name].[hash].css',
             chunkFilename: isDev ? '[id].css' : '[id].[hash].css'
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+
+        new HtmlWebpackPlugin({
+            template: _.resolve('./example/index.html'),
+            inject: true,
+            chunks: ['example']
         }),
     ]
 }

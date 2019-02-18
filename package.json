@@ -8,7 +8,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf ./dist && cross-env MODE=production webpack --config ./build/webpack.config.prod.js --progress --colors",
+    "build:component": "cross-env MODE=production webpack --config ./build/webpack.config.prod.js --progress --colors",
+    "build:example": "cross-env MODE=production webpack --config ./build/webpack.config.prod.example.js --progress --colors",
+    "build": "rm -rf ./dist && npm run build:example && npm run build:component",
     "dev": "rm -rf ./dist && cross-env MODE=development webpack-dev-server --config ./build/webpack.config.dev.js --progress --colors"
   },
   "keywords": [
