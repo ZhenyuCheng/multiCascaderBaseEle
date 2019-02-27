@@ -219,21 +219,18 @@
           return this.activeOptions[parentMenuIndex].find((ele)=> ele.value === parentValue);
         }
       },
-      pushParent(item) {
+      pushParent(item, __IS__FLAT__OPTIONS) {
         // 子节点全checked时push父节点
         if (!this.isNodeCanpush(item)) {
           return;
         }
-        let parent = item.__IS__FLAT__OPTIONS && item.parent ? item.parent : this.findParent(item);
+        let parent = (item.__IS__FLAT__OPTIONS || __IS__FLAT__OPTIONS) && item.parent ? item.parent : this.findParent(item);
         if (parent) {
           let parentStatus = this.isItemChecked(parent);
           if (parentStatus === CHILD_ALL_CHECKED && !this.activeMultiValue.find((ele) => this.isArrayEqual(parent.path, ele))) {
             if (this.isNodeCanpush(parent)) {
               this.activeMultiValue.push(parent.path);
-              if(item.__IS__FLAT__OPTIONS) {
-                parent.__IS__FLAT__OPTIONS = true;
-              }
-              this.pushParent(parent);
+              this.pushParent(parent, true);
             }
           }
         }

@@ -62,7 +62,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "469d299328d1717901cd"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0370eeffb01094366fdd"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -13491,7 +13491,7 @@ var _default = {
         });
       }
     },
-    pushParent: function pushParent(item) {
+    pushParent: function pushParent(item, __IS__FLAT__OPTIONS) {
       var _this4 = this;
 
       // 子节点全checked时push父节点
@@ -13499,7 +13499,7 @@ var _default = {
         return;
       }
 
-      var parent = item.__IS__FLAT__OPTIONS && item.parent ? item.parent : this.findParent(item);
+      var parent = (item.__IS__FLAT__OPTIONS || __IS__FLAT__OPTIONS) && item.parent ? item.parent : this.findParent(item);
 
       if (parent) {
         var parentStatus = this.isItemChecked(parent);
@@ -13509,12 +13509,7 @@ var _default = {
         })) {
           if (this.isNodeCanpush(parent)) {
             this.activeMultiValue.push(parent.path);
-
-            if (item.__IS__FLAT__OPTIONS) {
-              parent.__IS__FLAT__OPTIONS = true;
-            }
-
-            this.pushParent(parent);
+            this.pushParent(parent, true);
           }
         }
       }
