@@ -100,7 +100,7 @@
               });
               option.path = [...currentPath, option.value];
               if (Array.isArray(option.children)) {
-                formatOptions(option.children, option.path, option.children.length);
+                formatOptions(option.children, option.path);
               }
             });
           };
@@ -157,14 +157,17 @@
               isChecked = CHECKED; // 如果选中父级自动选中子菜单(selectChildren: true) 且非第一级菜单，且父节点的path在activeMultiValue中
             }
           } else if (item.children && item.children.length > 0) {
-            // 有大于0个的子集菜单
-            if (item.children.every(ele => {
-              let tmp = this.isItemChecked(ele);
-              return tmp === CHECKED || tmp === CHILD_ALL_CHECKED;
-            })) {
-              isChecked = CHILD_ALL_CHECKED; // 如果所有的子菜单都checked
-            } else if (!item.children.every(ele => this.isItemChecked(ele) === UNCHECKED)) {
-              isChecked = CHILD_SOME_CHECKED; // 如果所有的子菜单不全是unchecked
+            // 有大于0个的子菜单
+            // 且父子联动或者可输出所有层级的节点
+            if(this.selectChildren || this.onlyOutPutLeafNode) {
+              if (item.children.every(ele => {
+                let tmp = this.isItemChecked(ele);
+                return tmp === CHECKED || tmp === CHILD_ALL_CHECKED;
+              })) {
+                isChecked = CHILD_ALL_CHECKED; // 如果所有的子菜单都checked
+              } else if (!item.children.every(ele => this.isItemChecked(ele) === UNCHECKED)) {
+                isChecked = CHILD_SOME_CHECKED; // 如果所有的子菜单不全是unchecked
+              }
             }
           } else if (item.__IS__FLAT__OPTIONS) {
             let options = this.activeOptions[0].filter((ele)=> {
@@ -172,14 +175,16 @@
               return (this.isLeafNode(ele) && path.length > item.path.length && this.isArrayEqual(path.slice(0, item.path.length), item.path));
             });
             if (options.length > 0) {
-              if (options.every(child => {
-                return this.activeMultiValue.find((ele) => this.isArrayEqual(child.path, ele));
-              })) {
-                isChecked = CHILD_ALL_CHECKED; // 如果所有的子菜单都checked
-              } else if (options.some(child => {
-                return this.activeMultiValue.find((ele) => this.isArrayEqual(child.path, ele));
-              })) {
-                isChecked = CHILD_SOME_CHECKED; // 如果所有的子菜单不全是unchecked
+              if(this.selectChildren || this.onlyOutPutLeafNode) {
+                if (options.every(child => {
+                  return this.activeMultiValue.find((ele) => this.isArrayEqual(child.path, ele));
+                })) {
+                  isChecked = CHILD_ALL_CHECKED; // 如果所有的子菜单都checked
+                } else if (options.some(child => {
+                  return this.activeMultiValue.find((ele) => this.isArrayEqual(child.path, ele));
+                })) {
+                  isChecked = CHILD_SOME_CHECKED; // 如果所有的子菜单不全是unchecked
+                }
               }
             }
           }
@@ -221,10 +226,15 @@
         }
         let parent = item.__IS__FLAT__OPTIONS && item.parent ? item.parent : this.findParent(item);
         if (parent) {
-          let parentStatus = this.isItemChecked(item.parent);
-          if (parentStatus === CHILD_ALL_CHECKED && !this.activeMultiValue.find((ele) => this.isArrayEqual(item.parent.path, ele))) {
-            this.activeMultiValue.push(item.parent.path);
-            this.pushParent(parent);
+          let parentStatus = this.isItemChecked(parent);
+          if (parentStatus === CHILD_ALL_CHECKED && !this.activeMultiValue.find((ele) => this.isArrayEqual(parent.path, ele))) {
+            if (this.isNodeCanpush(parent)) {
+              this.activeMultiValue.push(parent.path);
+              if(item.__IS__FLAT__OPTIONS) {
+                parent.__IS__FLAT__OPTIONS = true;
+              }
+              this.pushParent(parent);
+            }
           }
         }
       },
@@ -247,8 +257,11 @@
             if (this.selectChildren) {
               this.pushAllChild(item);
             }
-            if (!this.onlyOutPutLeafNode) {
-              this.pushParent(item);
+            // !selectChildren && !onlyOutPutLeafNode 
+            if (!this.onlyOutPutLeafNode && this.selectChildren) {
+              // if(this.selectChildren) {
+                this.pushParent(item);
+              // }
             }
           } else {
             if (this.selectChildren) { // 子节点如果随着父节点联动，则子节点取消也会取消父节点的选中状态, 并取消孙子节点的状态
@@ -271,7 +284,7 @@
           }
         }
         if (item.__IS__FLAT__OPTIONS) {
-          this.activeValue = item.value;
+          this.activeValue = JSON.parse(JSON.stringify(item.value));
         } else if (menuIndex) {
           this.activeValue.splice(menuIndex, this.activeValue.length - 1, item.value);
         } else {

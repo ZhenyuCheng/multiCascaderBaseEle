@@ -1,6 +1,6 @@
 {
   "name": "multi-cascader-base-ele",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "基于element-ui实现的多选级联组件，完全继承element-ui级联组件功能",
   "main": "dist/index.js",
   "directories": {
@@ -75,5 +75,9 @@
     "webpack-merge": "4.1.2"
   },
   "author": "chengzhenyu925@163.com",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZhenyuCheng/multiCascaderBaseEle"
+  }
 }

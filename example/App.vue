@@ -7,7 +7,7 @@
             change-on-select v-model="selectedOptions"> </el-multi-cascader> -->
             <div class="top-setting">
                 <p>
-                    如果选父节点子节点不联动（selectChildren：false），且只输出子节点（onlyOutPutLeafNode：false），选父节点没有任何效果等同于changeOnSelect为false
+                    如果选父节点子节点不联动（selectChildren：false），且只输出子节点（onlyOutPutLeafNode：true），选父节点没有任何效果等同于changeOnSelect为false
                 </p>
                 <el-checkbox v-model="selectChildren" label="selectChildren--是否父子联动(仅多选有效, 默认false)" @change="handleChange"></el-checkbox>
                 <el-checkbox v-model="onlyOutPutLeafNode" label="onlyOutPutLeafNode--只输出叶子节点(仅多选有效, 默认false)" @change="handleChange"></el-checkbox>

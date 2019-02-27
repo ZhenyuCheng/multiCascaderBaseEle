@@ -156,21 +156,32 @@ const popperMixin = {
   beforeDestroy: Popper.beforeDestroy
 };
 
-const copyArray = (arr) => {
+const copyArray = (arr, currentPath, valueKey, childrenKey) => {
   if (!arr || !Array.isArray(arr)) return arr;
   const result = [];
   
-  arr.forEach(item => {
-    const itemCopy = {};
-    let configurableProps = Object.keys(item);
-    configurableProps.forEach(prop => {
-      if (Array.isArray(item[prop])) {
-        itemCopy[prop] = copyArray(item[prop]);
-      } else {
-        itemCopy[prop] = item[prop];
+  arr.forEach((item = {}) => {
+    if (typeof item === 'object' && !Array.isArray(item)) {
+      let itemCopy = {};
+      let configurableProps = Object.keys(item);
+      configurableProps.forEach(prop => {
+        if (Array.isArray(item[prop])) {
+          if(prop === childrenKey && currentPath) {
+            itemCopy[prop] = copyArray(item[prop], [...currentPath, item[valueKey]], valueKey, childrenKey);
+          } else {
+            itemCopy[prop] = copyArray(item[prop]);
+          }
+        } else {
+          itemCopy[prop] = item[prop];
+        }
+      });
+      if(currentPath) {
+        itemCopy.path = [...currentPath, item[valueKey]];
       }
-    });
-    result.push(itemCopy);
+      result.push(itemCopy);
+    } else {
+      result.push(JSON.parse(JSON.stringify(item)));
+    }
   });
   return result;
 };
@@ -531,7 +542,11 @@ export default {
     },
     flattenOptions(options, ancestor = []) {
       let flatOptions = [];
-      options = copyArray(options);
+      if(options.length > 0 &&  options[0].path) {
+        options = copyArray(options);        
+      } else {
+        options = copyArray(options, [], this.valueKey, this.childrenKey);
+      }
       options.forEach((option) => {
         option.path = ancestor.map(ele => ele[this.valueKey]);
         option.path.push(option[this.valueKey]);
