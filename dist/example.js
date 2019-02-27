@@ -62,7 +62,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b93e73110c4bfd0294a4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "469d299328d1717901cd"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -13395,7 +13395,7 @@ var _default = {
 
       var isChecked = UNCHECKED;
 
-      if (item.__IS__FLAT__OPTIONS) {
+      if (item.__IS__FLAT__OPTIONS && !item.path) {
         item.path = item.value;
       }
 

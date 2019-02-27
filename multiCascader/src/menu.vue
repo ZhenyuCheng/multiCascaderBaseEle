@@ -146,7 +146,7 @@
           return;
         }
         let isChecked = UNCHECKED;
-        if (item.__IS__FLAT__OPTIONS) {
+        if (item.__IS__FLAT__OPTIONS && !item.path) {
           item.path = item.value;
         }
         if (this.multiple) {
