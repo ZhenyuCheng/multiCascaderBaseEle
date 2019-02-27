@@ -36,5 +36,3 @@ change-on-select v-model="selectedOptions"> </el-multi-cascader>
 # 功能实例，以及选项
 [查看demo](https://zhenyucheng.github.io/multiCascaderBaseEle/dist/index.html)
 
-# Todo
-[] 取消选择父子不联动selectChildren为false，且输出所有级别节点onlyOutPutLeafNode：false，选满子级后父级默认选中状态的行为
