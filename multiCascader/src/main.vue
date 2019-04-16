@@ -146,6 +146,9 @@ const popperMixin = {
       default: 'bottom-start'
     },
     appendToBody: Popper.props.appendToBody,
+    parentEl: {
+      type: String
+    },
     arrowOffset: Popper.props.arrowOffset,
     offset: Popper.props.offset,
     boundariesPadding: Popper.props.boundariesPadding,
@@ -296,7 +299,8 @@ export default {
       needFocus: true,
       isOnComposition: false,
       inputLength: 20,
-      inputWidth: 0
+      inputWidth: 0,
+      initialInputHeight: 0
     };
   },
 
@@ -390,6 +394,7 @@ export default {
     options: {
       deep: true,
       handler(value) {
+        console.log(value);
         if (!this.menu) {
           this.initMenu();
         }
@@ -397,7 +402,7 @@ export default {
           this.resetInputHeight();
         }
         this.flatOptions = this.flattenOptions(this.options);
-        this.menu.options = value;
+        this.$forceUpdate();
       }
     }
   },
@@ -415,6 +420,9 @@ export default {
       this.menu.popperClass = this.popperClass;
       this.menu.hoverThreshold = this.hoverThreshold;
       this.popperElm = this.menu.$el;
+      if (!this.appendToBody && document.querySelector(this.parentEl)) {
+        document.querySelector(this.parentEl).appendChild(this.popperElm);
+      }
       this.menu.$refs.menus[0].setAttribute('id', `cascader-menu-${this.id}`);
       this.menu.$on('pick', this.handlePick);
       this.menu.$on('activeItemChange', this.handleActiveItemChange);
@@ -679,7 +687,13 @@ export default {
     const input = this.$refs.input;
     this.$nextTick(() => {
       if (input && input.$el) {
+        const sizeMap = {
+          medium: 36,
+          small: 32,
+          mini: 28
+        };
         this.inputWidth = input.$el.getBoundingClientRect().width;
+        this.initialInputHeight = input.$el.getBoundingClientRect().height || sizeMap[this.size];
       }
     });
   },

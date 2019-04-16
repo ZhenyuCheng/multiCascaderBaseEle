@@ -304,9 +304,8 @@
           this.activeOptions.splice(menuIndex + 1, len, item.children);
           if (this.changeOnSelect) {
             this.$emit('pick', this.activeMultiValue.slice(), false);
-          } else {
-            this.$emit('activeItemChange', this.activeValue);
-          }
+          } 
+          this.$emit('activeItemChange', this.activeValue);
           return;
         }
         const len = this.activeOptions.length;

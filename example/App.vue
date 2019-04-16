@@ -16,6 +16,8 @@
                 <el-checkbox v-model="showAllLevels" label="showAllLevels--是否展示全部label" @change="handleChange"></el-checkbox>
                 <el-checkbox v-model="disabled" label="disabled--是否禁用" @change="handleChange"></el-checkbox>
                 <el-checkbox v-model="changeOnSelect" label="changeOnSelect--是否可以选任意一级" @change="handleChange"></el-checkbox>
+                <el-checkbox v-model="appendToBody" label="appendToBody--是否挂载到body上，否的话需要通过parent-el属性提供挂载元素的选择器" @change="handleChange"></el-checkbox>
+
                 <el-input v-model="separator" placeholder="分隔符" label="分隔符"  @change="handleChange">
                     <template slot="prepend">分隔符</template>
                 </el-input>
@@ -38,6 +40,9 @@
             :disabled="disabled"
             :clearable="clearable"
             :change-on-select="changeOnSelect"
+            :append-to-body="appendToBody"
+            size="medium"
+            parent-el=".multi-cascader"
             v-model="selectedOptions">
             </el-multi-cascader>
             <div class="select-value">
@@ -244,6 +249,7 @@
                 optionsShow: JSON.parse(JSON.stringify(optionsShow)),
                 options2: JSON.parse(JSON.stringify(optionsShow)),
                 options: JSON.parse(JSON.stringify(optionsShow)),
+                appendToBody: true,
                 multiple: true,
                 selectChildren: true,
                 onlyOutPutLeafNode: false,

@@ -1,0 +1,13 @@
+{
+    "brace_style": "none,preserve-inline",
+    "indent_size": 4,
+    "indent_char": " ",
+    "unformatted": [""],
+    "css": {
+        "indent_size": 4
+    },
+    "html": {
+        "indent_scripts": "keep",
+        "wrap_attributes":"force"
+    }
+}
