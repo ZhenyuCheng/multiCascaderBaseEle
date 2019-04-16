@@ -11452,10 +11452,9 @@ var _default = {
 
         if (this.changeOnSelect) {
           this.$emit('pick', this.activeMultiValue.slice(), false);
-        } else {
-          this.$emit('activeItemChange', this.activeValue);
         }
 
+        this.$emit('activeItemChange', this.activeValue);
         return;
       }
 
@@ -11956,6 +11955,9 @@ var popperMixin = {
       default: 'bottom-start'
     },
     appendToBody: _vuePopper.default.props.appendToBody,
+    parentEl: {
+      type: String
+    },
     arrowOffset: _vuePopper.default.props.arrowOffset,
     offset: _vuePopper.default.props.offset,
     boundariesPadding: _vuePopper.default.props.boundariesPadding,
@@ -12108,7 +12110,8 @@ var _default2 = {
       needFocus: true,
       isOnComposition: false,
       inputLength: 20,
-      inputWidth: 0
+      inputWidth: 0,
+      initialInputHeight: 0
     };
   },
   computed: {
@@ -12213,6 +12216,8 @@ var _default2 = {
     options: {
       deep: true,
       handler: function handler(value) {
+        console.log(value);
+
         if (!this.menu) {
           this.initMenu();
         }
@@ -12222,7 +12227,7 @@ var _default2 = {
         }
 
         this.flatOptions = this.flattenOptions(this.options);
-        this.menu.options = value;
+        this.$forceUpdate();
       }
     }
   },
@@ -12239,6 +12244,11 @@ var _default2 = {
       this.menu.popperClass = this.popperClass;
       this.menu.hoverThreshold = this.hoverThreshold;
       this.popperElm = this.menu.$el;
+
+      if (!this.appendToBody && document.querySelector(this.parentEl)) {
+        document.querySelector(this.parentEl).appendChild(this.popperElm);
+      }
+
       this.menu.$refs.menus[0].setAttribute('id', "cascader-menu-".concat(this.id));
       this.menu.$on('pick', this.handlePick);
       this.menu.$on('activeItemChange', this.handleActiveItemChange);
@@ -12569,7 +12579,13 @@ var _default2 = {
     var input = this.$refs.input;
     this.$nextTick(function () {
       if (input && input.$el) {
+        var sizeMap = {
+          medium: 36,
+          small: 32,
+          mini: 28
+        };
         _this12.inputWidth = input.$el.getBoundingClientRect().width;
+        _this12.initialInputHeight = input.$el.getBoundingClientRect().height || sizeMap[_this12.size];
       }
     });
   },
