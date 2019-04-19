@@ -62,7 +62,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "679669f34b7ede432874"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "73466f4d230222365242"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -14830,12 +14830,40 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     var optionsShow = [{
       label: "默认",
       id: -1,
-      children: null,
+      children: [],
       value: -1
     }, {
       label: "电信",
@@ -15005,6 +15033,31 @@ var _default = {
       this.$nextTick(function () {
         _this.shouldReset = true;
       });
+    },
+    handleItemChange: function handleItemChange($event) {
+      if ($event[0] === -1) {
+        this.options[0].children = [{
+          label: "异步加载的二级",
+          children: [{
+            label: "安徽电信",
+            id: 51,
+            children: null,
+            value: 51
+          }, {
+            label: "福建电信",
+            id: 52,
+            children: null,
+            value: 52
+          }, {
+            label: "江苏电信",
+            id: 53,
+            children: null,
+            value: 53
+          }],
+          id: 11,
+          value: 11
+        }];
+      }
     }
   }
 };
@@ -17905,6 +17958,7 @@ var render = function() {
                   size: "medium",
                   "parent-el": ".multi-cascader"
                 },
+                on: { "active-item-change": _vm.handleItemChange },
                 model: {
                   value: _vm.selectedOptions,
                   callback: function($$v) {
