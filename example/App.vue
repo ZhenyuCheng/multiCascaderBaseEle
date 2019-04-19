@@ -293,29 +293,32 @@ export default {
         },
         handleItemChange($event) {
             if ($event[0] === -1) {
-                this.options[0].children = [{
-                    label: "异步加载的二级",
-                    children: [{
-                        label: "安徽电信",
-                        id: 51,
-                        children: null,
-                        value: 51
-                    },
-                    {
-                        label: "福建电信",
-                        id: 52,
-                        children: null,
-                        value: 52
-                    },
-                    {
-                        label: "江苏电信",
-                        id: 53,
-                        children: null,
-                        value: 53
-                    }],
-                    id: 11,
-                    value: 11
-                }]
+                setTimeout(() => {
+                    this.options[0].children = [{
+                        label: "异步加载的二级",
+                        children: [{
+                            label: "安徽电信",
+                            id: 51,
+                            children: null,
+                            value: 51
+                        },
+                        {
+                            label: "福建电信",
+                            id: 52,
+                            children: null,
+                            value: 52
+                        },
+                        {
+                            label: "江苏电信",
+                            id: 53,
+                            children: null,
+                            value: 53
+                        }],
+                        id: 11,
+                        value: 11
+                    }]
+                }, 1000);
+
             }
         }
     },

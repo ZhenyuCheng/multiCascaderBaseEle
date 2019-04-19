@@ -62,7 +62,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "73466f4d230222365242"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0ba048f90feefaa02260"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -15035,28 +15035,32 @@ var _default = {
       });
     },
     handleItemChange: function handleItemChange($event) {
+      var _this2 = this;
+
       if ($event[0] === -1) {
-        this.options[0].children = [{
-          label: "异步加载的二级",
-          children: [{
-            label: "安徽电信",
-            id: 51,
-            children: null,
-            value: 51
-          }, {
-            label: "福建电信",
-            id: 52,
-            children: null,
-            value: 52
-          }, {
-            label: "江苏电信",
-            id: 53,
-            children: null,
-            value: 53
-          }],
-          id: 11,
-          value: 11
-        }];
+        setTimeout(function () {
+          _this2.options[0].children = [{
+            label: "异步加载的二级",
+            children: [{
+              label: "安徽电信",
+              id: 51,
+              children: null,
+              value: 51
+            }, {
+              label: "福建电信",
+              id: 52,
+              children: null,
+              value: 52
+            }, {
+              label: "江苏电信",
+              id: 53,
+              children: null,
+              value: 53
+            }],
+            id: 11,
+            value: 11
+          }];
+        }, 1000);
       }
     }
   }
