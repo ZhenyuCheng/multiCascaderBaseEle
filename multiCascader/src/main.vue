@@ -232,6 +232,12 @@ export default {
         return [];
       }
     },
+    currentActiveValue: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
     separator: {
       type: String,
       default: '/'
@@ -419,6 +425,7 @@ export default {
       this.menu.onlyOutPutLeafNode = this.onlyOutPutLeafNode;
       this.menu.popperClass = this.popperClass;
       this.menu.hoverThreshold = this.hoverThreshold;
+      this.menu.currentActiveValue = this.currentActiveValue;
       this.popperElm = this.menu.$el;
       if (!this.appendToBody && document.querySelector(this.parentEl)) {
         document.querySelector(this.parentEl).appendChild(this.popperElm);

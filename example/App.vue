@@ -36,25 +36,30 @@
                     label="changeOnSelect--是否可以选任意一级"
                     @change="handleChange"></el-checkbox>
                 <el-checkbox v-model="appendToBody"
-                    label="appendToBody--是否挂载到body上，否的话需要通过parent-el属性提供挂载元素的选择器"
+                    label="appendToBody--是否挂载到body上，选否需用parent-el属性提供挂载元素选择器"
                     @change="handleChange"></el-checkbox>
 
+
+                <el-radio-group v-model="expandTrigger"
+                    @change="handleChange">
+                    <el-radio label="click">click触发菜单</el-radio>
+                    <el-radio label="hover">hover触发菜单</el-radio>
+                </el-radio-group>
+                <el-checkbox v-model="currentActiveValue"
+                    label="currentActiveValue--多选模式是否以指定路径打开菜单，demo设置为[1, 11, 51]"
+                    @change="handleChange"></el-checkbox>
                 <el-input v-model="separator"
                     placeholder="分隔符"
                     label="分隔符"
                     @change="handleChange">
                     <template slot="prepend">分隔符</template>
                 </el-input>
-                <el-radio-group v-model="expandTrigger"
-                    @change="handleChange">
-                    <el-radio label="click">click触发菜单</el-radio>
-                    <el-radio label="hover">hover触发菜单</el-radio>
-                </el-radio-group>
             </div>
             <el-multi-cascader class="multi-cascader"
                 :options="options"
                 v-if="shouldReset"
                 multiple
+                :currentActiveValue="currentActiveValue ? [1, 11, 51] : []"
                 :select-children="selectChildren"
                 :only-out-put-leaf-node="onlyOutPutLeafNode"
                 :collapse-tags="collapseTags"
@@ -279,7 +284,8 @@ export default {
             separator: '-',
             disabled: false,
             clearable: true,
-            changeOnSelect: true
+            changeOnSelect: true,
+            currentActiveValue: false
         }
     },
     methods: {

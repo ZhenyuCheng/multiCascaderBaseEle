@@ -52,6 +52,7 @@
         hoverTimer: 0,
         clicking: false,
         multiple: false,
+        currentActiveValue: [],
         selectChildren: false,
         onlyOutPutLeafNode: false, //
         id: generateId()
@@ -66,6 +67,7 @@
         if (value) {
           if (this.multiple) {
             this.activeMultiValue = this.value;
+            this.activeValue = this.currentActiveValue;
           } else {
             this.activeValue = this.value;
           }
@@ -76,6 +78,7 @@
         handler(value) {
           if (this.multiple) {
             this.activeMultiValue = this.value;
+            this.activeValue = this.currentActiveValue;
           } else {
             this.activeValue = value;
           }
