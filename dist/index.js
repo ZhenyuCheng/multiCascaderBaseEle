@@ -11133,6 +11133,7 @@ var _default = {
       hoverTimer: 0,
       clicking: false,
       multiple: false,
+      currentActiveValue: [],
       selectChildren: false,
       onlyOutPutLeafNode: false,
       //
@@ -11146,6 +11147,7 @@ var _default = {
       if (value) {
         if (this.multiple) {
           this.activeMultiValue = this.value;
+          this.activeValue = this.currentActiveValue;
         } else {
           this.activeValue = this.value;
         }
@@ -11156,6 +11158,7 @@ var _default = {
       handler: function handler(value) {
         if (this.multiple) {
           this.activeMultiValue = this.value;
+          this.activeValue = this.currentActiveValue;
         } else {
           this.activeValue = value;
         }
@@ -12041,6 +12044,12 @@ var _default2 = {
         return [];
       }
     },
+    currentActiveValue: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
     separator: {
       type: String,
       default: '/'
@@ -12243,6 +12252,7 @@ var _default2 = {
       this.menu.onlyOutPutLeafNode = this.onlyOutPutLeafNode;
       this.menu.popperClass = this.popperClass;
       this.menu.hoverThreshold = this.hoverThreshold;
+      this.menu.currentActiveValue = this.currentActiveValue;
       this.popperElm = this.menu.$el;
 
       if (!this.appendToBody && document.querySelector(this.parentEl)) {

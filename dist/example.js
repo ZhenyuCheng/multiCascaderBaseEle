@@ -62,7 +62,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0ba048f90feefaa02260"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "f588eda9e9503519ed68"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -13284,6 +13284,7 @@ var _default = {
       hoverTimer: 0,
       clicking: false,
       multiple: false,
+      currentActiveValue: [],
       selectChildren: false,
       onlyOutPutLeafNode: false,
       //
@@ -13297,6 +13298,7 @@ var _default = {
       if (value) {
         if (this.multiple) {
           this.activeMultiValue = this.value;
+          this.activeValue = this.currentActiveValue;
         } else {
           this.activeValue = this.value;
         }
@@ -13307,6 +13309,7 @@ var _default = {
       handler: function handler(value) {
         if (this.multiple) {
           this.activeMultiValue = this.value;
+          this.activeValue = this.currentActiveValue;
         } else {
           this.activeValue = value;
         }
@@ -14192,6 +14195,12 @@ var _default2 = {
         return [];
       }
     },
+    currentActiveValue: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
     separator: {
       type: String,
       default: '/'
@@ -14394,6 +14403,7 @@ var _default2 = {
       this.menu.onlyOutPutLeafNode = this.onlyOutPutLeafNode;
       this.menu.popperClass = this.popperClass;
       this.menu.hoverThreshold = this.hoverThreshold;
+      this.menu.currentActiveValue = this.currentActiveValue;
       this.popperElm = this.menu.$el;
 
       if (!this.appendToBody && document.querySelector(this.parentEl)) {
@@ -14858,6 +14868,11 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     var optionsShow = [{
@@ -15020,7 +15035,8 @@ var _default = {
       separator: '-',
       disabled: false,
       clearable: true,
-      changeOnSelect: true
+      changeOnSelect: true,
+      currentActiveValue: false
     };
   },
   methods: {
@@ -17886,7 +17902,7 @@ var render = function() {
               _c("el-checkbox", {
                 attrs: {
                   label:
-                    "appendToBody--是否挂载到body上，否的话需要通过parent-el属性提供挂载元素的选择器"
+                    "appendToBody--是否挂载到body上，选否需用parent-el属性提供挂载元素选择器"
                 },
                 on: { change: _vm.handleChange },
                 model: {
@@ -17897,23 +17913,6 @@ var render = function() {
                   expression: "appendToBody"
                 }
               }),
-              _vm._v(" "),
-              _c(
-                "el-input",
-                {
-                  attrs: { placeholder: "分隔符", label: "分隔符" },
-                  on: { change: _vm.handleChange },
-                  model: {
-                    value: _vm.separator,
-                    callback: function($$v) {
-                      _vm.separator = $$v
-                    },
-                    expression: "separator"
-                  }
-                },
-                [_c("template", { slot: "prepend" }, [_vm._v("分隔符")])],
-                2
-              ),
               _vm._v(" "),
               _c(
                 "el-radio-group",
@@ -17937,6 +17936,38 @@ var render = function() {
                   ])
                 ],
                 1
+              ),
+              _vm._v(" "),
+              _c("el-checkbox", {
+                attrs: {
+                  label:
+                    "currentActiveValue--多选模式是否以指定路径打开菜单，demo设置为[1, 11, 51]"
+                },
+                on: { change: _vm.handleChange },
+                model: {
+                  value: _vm.currentActiveValue,
+                  callback: function($$v) {
+                    _vm.currentActiveValue = $$v
+                  },
+                  expression: "currentActiveValue"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "el-input",
+                {
+                  attrs: { placeholder: "分隔符", label: "分隔符" },
+                  on: { change: _vm.handleChange },
+                  model: {
+                    value: _vm.separator,
+                    callback: function($$v) {
+                      _vm.separator = $$v
+                    },
+                    expression: "separator"
+                  }
+                },
+                [_c("template", { slot: "prepend" }, [_vm._v("分隔符")])],
+                2
               )
             ],
             1
@@ -17948,6 +17979,7 @@ var render = function() {
                 attrs: {
                   options: _vm.options,
                   multiple: "",
+                  currentActiveValue: _vm.currentActiveValue ? [1, 11, 51] : [],
                   "select-children": _vm.selectChildren,
                   "only-out-put-leaf-node": _vm.onlyOutPutLeafNode,
                   "collapse-tags": _vm.collapseTags,
