@@ -336,7 +336,8 @@ export default {
     .el-checkbox,
     .el-input,
     .el-radio-group {
-        width: 450px;
+        max-width: 550px;
+        min-width: 450px;
         margin: 5px 0;
     }
 }

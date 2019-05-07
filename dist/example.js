@@ -62,7 +62,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "f588eda9e9503519ed68"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "400f533c92d140eedcab"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -12458,7 +12458,7 @@ exports = module.exports = __webpack_require__(16)(false);
 
 
 // module
-exports.push([module.i, "\n.top-setting .el-checkbox, .top-setting .el-input, .top-setting .el-radio-group {\n  width: 450px;\n  margin: 5px 0;\n}\n.example-wrap {\n  height: 100%;\n  position: fixed;\n}\n.block {\n  display: inline-block;\n  vertical-align: top;\n  margin: 20px 5px;\n  width: calc(100vw - 540px);\n}\n.block .multi-cascader {\n  margin-bottom: 10px;\n  width: 300px;\n}\n.select-value {\n  display: inline-block;\n  vertical-align: top;\n  margin-bottom: 10px;\n  width: calc(100vw - 850px);\n  min-height: 300px;\n  border: 1px solid #eee;\n  border-radius: 6px;\n  padding: 10px;\n  box-sizing: border-box;\n}\n.select-value > span {\n  display: block;\n}\n", ""]);
+exports.push([module.i, "\n.top-setting .el-checkbox, .top-setting .el-input, .top-setting .el-radio-group {\n  max-width: 550px;\n  min-width: 450px;\n  margin: 5px 0;\n}\n.example-wrap {\n  height: 100%;\n  position: fixed;\n}\n.block {\n  display: inline-block;\n  vertical-align: top;\n  margin: 20px 5px;\n  width: calc(100vw - 540px);\n}\n.block .multi-cascader {\n  margin-bottom: 10px;\n  width: 300px;\n}\n.select-value {\n  display: inline-block;\n  vertical-align: top;\n  margin-bottom: 10px;\n  width: calc(100vw - 850px);\n  min-height: 300px;\n  border: 1px solid #eee;\n  border-radius: 6px;\n  padding: 10px;\n  box-sizing: border-box;\n}\n.select-value > span {\n  display: block;\n}\n", ""]);
 
 // exports
 
