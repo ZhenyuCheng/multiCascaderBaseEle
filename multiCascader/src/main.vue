@@ -723,7 +723,7 @@ export default {
     align-items: center;
     flex-wrap: wrap;
     padding: 0;
-    background: #fff;
+    background: transparent;
     margin-left: 1px;
 
     > span {
