@@ -11451,11 +11451,9 @@ var _default = {
       if (this.multiple) {
         var _len = this.activeOptions.length;
         this.activeValue.splice(menuIndex, _len, item.value);
-        this.activeOptions.splice(menuIndex + 1, _len, item.children);
-
-        if (this.changeOnSelect) {
-          this.$emit('pick', this.activeMultiValue.slice(), false);
-        }
+        this.activeOptions.splice(menuIndex + 1, _len, item.children); // if (this.changeOnSelect) {
+        //   this.$emit('pick', this.activeMultiValue.slice(), false);
+        // } 
 
         this.$emit('activeItemChange', this.activeValue);
         return;

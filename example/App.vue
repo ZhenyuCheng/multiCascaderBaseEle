@@ -68,6 +68,7 @@
                 :expand-trigger="expandTrigger"
                 :separator="separator"
                 :disabled="disabled"
+                @change="valueChange"
                 :clearable="clearable"
                 :change-on-select="changeOnSelect"
                 :append-to-body="appendToBody"
@@ -289,6 +290,9 @@ export default {
         }
     },
     methods: {
+        valueChange($event) {
+            console.log($event);
+        },
         handleChange() {
             this.selectedOptions = [];
             this.options = JSON.parse(JSON.stringify(this.optionsShow));

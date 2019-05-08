@@ -62,7 +62,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "400f533c92d140eedcab"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e9d623e1901a39caba4c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -13602,11 +13602,9 @@ var _default = {
       if (this.multiple) {
         var _len = this.activeOptions.length;
         this.activeValue.splice(menuIndex, _len, item.value);
-        this.activeOptions.splice(menuIndex + 1, _len, item.children);
-
-        if (this.changeOnSelect) {
-          this.$emit('pick', this.activeMultiValue.slice(), false);
-        }
+        this.activeOptions.splice(menuIndex + 1, _len, item.children); // if (this.changeOnSelect) {
+        //   this.$emit('pick', this.activeMultiValue.slice(), false);
+        // } 
 
         this.$emit('activeItemChange', this.activeValue);
         return;
@@ -14873,6 +14871,7 @@ exports.default = void 0;
 //
 //
 //
+//
 var _default = {
   data: function data() {
     var optionsShow = [{
@@ -15040,6 +15039,9 @@ var _default = {
     };
   },
   methods: {
+    valueChange: function valueChange($event) {
+      console.log($event);
+    },
     handleChange: function handleChange() {
       var _this = this;
 
@@ -17994,7 +17996,10 @@ var render = function() {
                   size: "medium",
                   "parent-el": ".multi-cascader"
                 },
-                on: { "active-item-change": _vm.handleItemChange },
+                on: {
+                  change: _vm.valueChange,
+                  "active-item-change": _vm.handleItemChange
+                },
                 model: {
                   value: _vm.selectedOptions,
                   callback: function($$v) {
