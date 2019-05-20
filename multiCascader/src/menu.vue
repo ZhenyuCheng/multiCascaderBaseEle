@@ -290,10 +290,10 @@
         } else {
           this.activeValue = [item.value];
         }
-        if (this.multiple) {
+        if (this.multiple && (multipleCheckBox !== void 0)) {
           this.$emit('pick', this.activeMultiValue.slice());
           this.value = this.activeMultiValue.slice();
-        } else {
+        } else if(!this.multiple && multipleCheckBox === void 0){
           this.$emit('pick', this.activeValue.slice());
         }
       },
