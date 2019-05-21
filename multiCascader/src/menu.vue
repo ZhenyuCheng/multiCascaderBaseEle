@@ -263,7 +263,7 @@
                 this.pushParent(item);
               // }
             }
-          } else {
+          } else if(multipleCheckBox === false){
             if (this.selectChildren) { // 子节点如果随着父节点联动，则子节点取消也会取消父节点的选中状态, 并取消孙子节点的状态
               // 删除父节点
               item.path.forEach((ele, idx) => {
@@ -431,6 +431,9 @@
               const triggerHandler = () => {
                 if (this.visible) {
                   this.activeItem(item, menuIndex);
+                  if(multiple) {
+                    this.select(item, menuIndex);
+                  }
                   this.$nextTick(() => {
                     // adjust self and next level
                     this.scrollMenu(this.$refs.menus[menuIndex]);

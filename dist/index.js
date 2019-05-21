@@ -11693,7 +11693,7 @@ var _default = {
             // if(this.selectChildren) {
             this.pushParent(item); // }
           }
-        } else {
+        } else if (multipleCheckBox === false) {
           if (this.selectChildren) {
             // 子节点如果随着父节点联动，则子节点取消也会取消父节点的选中状态, 并取消孙子节点的状态
             // 删除父节点
@@ -11895,6 +11895,10 @@ var _default = {
             var triggerHandler = function triggerHandler() {
               if (_this7.visible) {
                 _this7.activeItem(item, menuIndex);
+
+                if (multiple) {
+                  _this7.select(item, menuIndex);
+                }
 
                 _this7.$nextTick(function () {
                   // adjust self and next level
