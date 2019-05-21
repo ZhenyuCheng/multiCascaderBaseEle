@@ -269,7 +269,7 @@ export default {
         }];
         return {
             shouldReset: true,
-            selectedOptions: [],
+            selectedOptions: [[ 1, 11, 51 ]],
             selectedOptions2: [],
             optionsShow: JSON.parse(JSON.stringify(optionsShow)),
             options2: JSON.parse(JSON.stringify(optionsShow)),

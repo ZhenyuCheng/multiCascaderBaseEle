@@ -1,5 +1,5 @@
 <template>
-    <span class="el-cascader"
+    <span class="el-cascader multi-cascader"
         :class="[
       {
         'is-opened': menuVisible,
@@ -16,6 +16,7 @@
         v-clickoutside="handleClickoutside"
         @keydown="handleKeydown">
         <el-input ref="input"
+        class="multi-base-input"
             :readonly="readonly"
             :placeholder="currentLabels.length ? undefined : placeholder"
             v-model="inputValue"
@@ -85,7 +86,7 @@
                     </el-tag>
                 </transition-group>
                 <el-input ref="multiInput"
-                    class="el-multicascader__input"
+                    class="el-multicascader__input "
                     :readonly="readonly"
                     :placeholder="currentLabels.length ? undefined : placeholder"
                     v-model="inputValue"
@@ -629,6 +630,9 @@ export default {
             if (this.multiple) this.resetInputHeight();
         },
         deleteTag(event, index) {
+            if(!this.menu) {
+                this.initMenu();
+            }
             if (index > -1 && !this.cascaderDisabled) {
                 let value = this.currentValue.slice();
                 let item = this.currentValue[index];
@@ -703,22 +707,28 @@ export default {
 </script>
 
 <style lang="less">
+
 .multi-cascader {
+    .multi-base-input {
+        input {
+            color: transparent;
+        }
+    }
+}
+.el-multicascader__input {
     .el-input__inner {
-        color: #fff
+        color: transparent
     }
 
-    .el-multicascader__input {
-        width: auto;
+    width: auto;
 
-        >input {
-            border: none;
-            padding: 0;
-            width: calc(100% - 4px);
-            margin: 2px 0 2px 6px;
-            display: inline-block;
-            color: #606266;
-        }
+    >input {
+        border: none;
+        padding: 0;
+        width: calc(100% - 4px);
+        margin: 2px 0 2px 6px;
+        display: inline-block;
+        color: #606266;
     }
 }
 
