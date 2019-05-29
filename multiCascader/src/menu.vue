@@ -321,7 +321,9 @@
         }
       },
       scrollMenu(menu) {
-        scrollIntoView(menu, menu.getElementsByClassName('is-active')[0]);
+        if(menu) {
+          scrollIntoView(menu, menu.getElementsByClassName('is-active')[0]);
+        }
       },
       handleMenuEnter() {
         this.$nextTick(() => this.$refs.menus.forEach(menu => this.scrollMenu(menu)));

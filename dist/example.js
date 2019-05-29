@@ -62,7 +62,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e53c6051a2b7b4750210"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "37995ff4f822c4b5b6b8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -14055,7 +14055,9 @@ var _default = {
       }
     },
     scrollMenu: function scrollMenu(menu) {
-      (0, _scrollIntoView.default)(menu, menu.getElementsByClassName('is-active')[0]);
+      if (menu) {
+        (0, _scrollIntoView.default)(menu, menu.getElementsByClassName('is-active')[0]);
+      }
     },
     handleMenuEnter: function handleMenuEnter() {
       var _this6 = this;

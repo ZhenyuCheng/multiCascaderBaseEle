@@ -11766,7 +11766,9 @@ var _default = {
       }
     },
     scrollMenu: function scrollMenu(menu) {
-      (0, _scrollIntoView.default)(menu, menu.getElementsByClassName('is-active')[0]);
+      if (menu) {
+        (0, _scrollIntoView.default)(menu, menu.getElementsByClassName('is-active')[0]);
+      }
     },
     handleMenuEnter: function handleMenuEnter() {
       var _this6 = this;

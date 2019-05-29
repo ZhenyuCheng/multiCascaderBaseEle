@@ -1,6 +1,6 @@
 {
   "name": "multi-cascader-base-ele",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "基于element-ui实现的多选级联组件，完全继承element-ui级联组件功能",
   "main": "dist/index.js",
   "directories": {
