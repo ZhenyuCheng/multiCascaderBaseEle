@@ -13289,8 +13289,12 @@ var render = function() {
         "el-input",
         {
           ref: "input",
-          staticClass: "multi-base-input el-multicascader__search",
-          class: { "is-focus": _vm.menuVisible },
+          staticClass: "multi-base-input",
+          class: {
+            "is-focus": _vm.menuVisible,
+            "el-multicascader__search":
+              _vm.filterable && !_vm.currentLabels.length
+          },
           attrs: {
             readonly: _vm.readonly,
             placeholder: _vm.currentLabels.length ? undefined : _vm.placeholder,

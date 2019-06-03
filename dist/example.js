@@ -62,7 +62,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9ae1305297d853ec5a34"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "1a05c4182f69972fbe21"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -17437,8 +17437,12 @@ var render = function() {
         "el-input",
         {
           ref: "input",
-          staticClass: "multi-base-input el-multicascader__search",
-          class: { "is-focus": _vm.menuVisible },
+          staticClass: "multi-base-input",
+          class: {
+            "is-focus": _vm.menuVisible,
+            "el-multicascader__search":
+              _vm.filterable && !_vm.currentLabels.length
+          },
           attrs: {
             readonly: _vm.readonly,
             placeholder: _vm.currentLabels.length ? undefined : _vm.placeholder,

@@ -16,7 +16,7 @@
         v-clickoutside="handleClickoutside"
         @keydown="handleKeydown">
         <el-input ref="input"
-            class="multi-base-input el-multicascader__search"
+            class="multi-base-input"
             :readonly="readonly"
             :placeholder="currentLabels.length ? undefined : placeholder"
             v-model="inputValue"
@@ -28,7 +28,7 @@
             :validate-event="false"
             :size="size"
             :disabled="cascaderDisabled"
-            :class="{ 'is-focus': menuVisible }">
+            :class="{ 'is-focus': menuVisible, 'el-multicascader__search': filterable && !currentLabels.length}">
             <template slot="suffix">
                 <i key="1"
                     v-if="clearable && inputHover && currentLabels.length"
