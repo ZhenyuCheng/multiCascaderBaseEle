@@ -67,7 +67,10 @@
         if (value) {
           if (this.multiple) {
             this.activeMultiValue = this.value;
-            this.activeValue = this.currentActiveValue;
+            if(this.currentActiveValue.length > 0) {
+              this.activeValue = this.currentActiveValue;
+              this.currentActiveValue= [];
+            }
           } else {
             this.activeValue = this.value;
           }
@@ -78,7 +81,10 @@
         handler(value) {
           if (this.multiple) {
             this.activeMultiValue = this.value;
-            this.activeValue = this.currentActiveValue;
+            if(this.currentActiveValue.length > 0) {
+              this.activeValue = this.currentActiveValue;
+              this.currentActiveValue= [];
+            }
           } else {
             this.activeValue = value;
           }

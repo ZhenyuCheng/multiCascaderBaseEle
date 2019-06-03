@@ -11443,7 +11443,11 @@ var _default = {
       if (value) {
         if (this.multiple) {
           this.activeMultiValue = this.value;
-          this.activeValue = this.currentActiveValue;
+
+          if (this.currentActiveValue.length > 0) {
+            this.activeValue = this.currentActiveValue;
+            this.currentActiveValue = [];
+          }
         } else {
           this.activeValue = this.value;
         }
@@ -11454,7 +11458,11 @@ var _default = {
       handler: function handler(value) {
         if (this.multiple) {
           this.activeMultiValue = this.value;
-          this.activeValue = this.currentActiveValue;
+
+          if (this.currentActiveValue.length > 0) {
+            this.activeValue = this.currentActiveValue;
+            this.currentActiveValue = [];
+          }
         } else {
           this.activeValue = value;
         }
@@ -13281,7 +13289,7 @@ var render = function() {
         "el-input",
         {
           ref: "input",
-          staticClass: "multi-base-input",
+          staticClass: "multi-base-input el-multicascader__search",
           class: { "is-focus": _vm.menuVisible },
           attrs: {
             readonly: _vm.readonly,
@@ -13479,7 +13487,8 @@ var render = function() {
                 _vm.filterable && _vm.currentLabels.length
                   ? _c("el-input", {
                       ref: "multiInput",
-                      staticClass: "el-multicascader__input ",
+                      staticClass:
+                        "el-multicascader__input el-multicascader__search",
                       class: { "is-focus": _vm.menuVisible },
                       style: {
                         "flex-grow": "1",
@@ -19261,7 +19270,7 @@ exports = module.exports = __webpack_require__(20)(false);
 
 
 // module
-exports.push([module.i, "\n.multi-cascader .multi-base-input input {\n  color: transparent;\n}\n.el-multicascader__input {\n  width: auto;\n}\n.el-multicascader__input .el-input__inner {\n  color: transparent;\n}\n.el-multicascader__input > input {\n  border: none;\n  padding: 0;\n  width: calc(100% - 4px);\n  margin: 2px 0 2px 6px;\n  display: inline-block;\n  color: #606266;\n}\n.el-multicascader__label {\n  height: auto;\n  position: absolute;\n  line-height: normal;\n  white-space: normal;\n  z-index: 1;\n  top: 50%;\n  transform: translateY(-50%);\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-align: center;\n      align-items: center;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  padding: 0;\n  background: transparent;\n  margin-left: 1px;\n}\n.el-multicascader__label > span {\n  display: contents;\n}\n.el-tag__close {\n  margin-top: -2px;\n}\n.el-tag {\n  box-sizing: border-box;\n  border-color: transparent;\n  margin: 2px 0 2px 6px;\n  background-color: #f0f2f5;\n}\n.el-tag__close.el-icon-close {\n  background-color: #c0c4cc;\n  right: -7px;\n  top: 0;\n  color: #fff;\n}\n.el-tag__close.el-icon-close:hover {\n  background-color: #909399;\n}\n.el-tag__close.el-icon-close::before {\n  display: block;\n  transform: translate(0, 0.5px);\n}\n", ""]);
+exports.push([module.i, "\n.multi-cascader .multi-base-input input {\n  color: transparent;\n}\n.el-multicascader__input {\n  width: auto;\n}\n.el-multicascader__input .el-input__inner {\n  color: transparent;\n}\n.el-multicascader__input > input {\n  border: none;\n  padding: 0;\n  width: calc(100% - 4px);\n  margin: 2px 0 2px 6px;\n  display: inline-block;\n  color: #606266;\n}\n.el-multicascader__search > input {\n  color: #606266!important;\n}\n.el-multicascader__label {\n  height: auto;\n  position: absolute;\n  line-height: normal;\n  white-space: normal;\n  z-index: 1;\n  top: 50%;\n  transform: translateY(-50%);\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-align: center;\n      align-items: center;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  padding: 0;\n  background: transparent;\n  margin-left: 1px;\n}\n.el-multicascader__label > span {\n  display: contents;\n}\n.el-tag__close {\n  margin-top: -2px;\n}\n.el-tag {\n  box-sizing: border-box;\n  border-color: transparent;\n  margin: 2px 0 2px 6px;\n  background-color: #f0f2f5;\n}\n.el-tag__close.el-icon-close {\n  background-color: #c0c4cc;\n  right: -7px;\n  top: 0;\n  color: #fff;\n}\n.el-tag__close.el-icon-close:hover {\n  background-color: #909399;\n}\n.el-tag__close.el-icon-close::before {\n  display: block;\n  transform: translate(0, 0.5px);\n}\n", ""]);
 
 // exports
 

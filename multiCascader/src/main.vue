@@ -16,7 +16,7 @@
         v-clickoutside="handleClickoutside"
         @keydown="handleKeydown">
         <el-input ref="input"
-        class="multi-base-input"
+            class="multi-base-input el-multicascader__search"
             :readonly="readonly"
             :placeholder="currentLabels.length ? undefined : placeholder"
             v-model="inputValue"
@@ -86,7 +86,7 @@
                     </el-tag>
                 </transition-group>
                 <el-input ref="multiInput"
-                    class="el-multicascader__input "
+                    class="el-multicascader__input el-multicascader__search"
                     :readonly="readonly"
                     :placeholder="currentLabels.length ? undefined : placeholder"
                     v-model="inputValue"
@@ -630,7 +630,7 @@ export default {
             if (this.multiple) this.resetInputHeight();
         },
         deleteTag(event, index) {
-            if(!this.menu) {
+            if (!this.menu) {
                 this.initMenu();
             }
             if (index > -1 && !this.cascaderDisabled) {
@@ -707,7 +707,6 @@ export default {
 </script>
 
 <style lang="less">
-
 .multi-cascader {
     .multi-base-input {
         input {
@@ -715,6 +714,8 @@ export default {
         }
     }
 }
+
+
 .el-multicascader__input {
     .el-input__inner {
         color: transparent
@@ -731,6 +732,13 @@ export default {
         color: #606266;
     }
 }
+
+.el-multicascader__search {
+    >input {
+        color: #606266!important;
+    }
+}
+
 
 .el-multicascader__label {
     height: auto;
