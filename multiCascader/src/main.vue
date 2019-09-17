@@ -705,7 +705,7 @@ export default {
     }
 };
 </script>
-
+<style lang="scss" src="./cascader.scss"></style>
 <style lang="less">
 .multi-cascader {
     .multi-base-input {
