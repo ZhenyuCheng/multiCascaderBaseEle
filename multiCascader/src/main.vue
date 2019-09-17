@@ -1,11 +1,11 @@
 <template>
-    <span class="el-cascader multi-cascader"
+    <span class="multi-el-cascader multi-cascader"
         :class="[
       {
         'is-opened': menuVisible,
         'is-disabled': cascaderDisabled
       },
-      cascaderSize ? 'el-cascader--' + cascaderSize : ''
+      cascaderSize ? 'multi-el-cascader--' + cascaderSize : ''
     ]"
         @click="handleClick"
         @mouseenter="inputHover = true"
@@ -28,25 +28,25 @@
             :validate-event="false"
             :size="size"
             :disabled="cascaderDisabled"
-            :class="{ 'is-focus': menuVisible, 'el-multicascader__search': filterable && !currentLabels.length}">
+            :class="{ 'is-focus': menuVisible, 'multi-el-multicascader__search': filterable && !currentLabels.length}">
             <template slot="suffix">
                 <i key="1"
                     v-if="clearable && inputHover && currentLabels.length"
-                    class="el-input__icon el-icon-circle-close el-cascader__clearIcon"
+                    class="multi-el-input__icon el-icon-circle-close multi-el-cascader__clearIcon"
                     @click="clearValue"></i>
                 <i key="2"
                     v-else
-                    class="el-input__icon el-icon-arrow-down"
+                    class="multi-el-input__icon el-icon-arrow-down"
                     :class="{ 'is-reverse': menuVisible }"></i>
             </template>
         </el-input>
-        <span class="el-cascader__label"
+        <span class="multi-el-cascader__label"
             v-show="(!multiple && inputValue === '' && !isOnComposition) || (multiple)"
             ref="tags"
             :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }"
             :class="[
         {
-          'el-multicascader__label': multiple,
+          'multi-el-multicascader__label': multiple,
         },
       ]">
             <template v-if="multiple">
@@ -86,7 +86,7 @@
                     </el-tag>
                 </transition-group>
                 <el-input ref="multiInput"
-                    class="el-multicascader__input el-multicascader__search"
+                    class="multi-el-multicascader__input multi-el-multicascader__search"
                     :readonly="readonly"
                     :placeholder="currentLabels.length ? undefined : placeholder"
                     v-model="inputValue"
@@ -467,7 +467,7 @@ export default {
             } else if (keyCode === 40) { // down
                 this.menuVisible = true; // 打开
                 setTimeout(() => {
-                    const firstMenu = this.popperElm.querySelectorAll('.el-cascader-menu')[0];
+                    const firstMenu = this.popperElm.querySelectorAll('.multi-el-cascader-menu')[0];
                     firstMenu.querySelectorAll("[tabindex='-1']")[0].focus();
                 });
                 e.stopPropagation();
@@ -544,7 +544,7 @@ export default {
             const h = this._c;
             return label.split(keyword)
                 .map((node, index) => index === 0 ? node : [
-                    h('span', { class: { 'el-cascader-menu__item__keyword': true } }, [this._v(keyword)]),
+                    h('span', { class: { 'multi-el-cascader-menu__item__keyword': true } }, [this._v(keyword)]),
                     node
                 ]);
         },
@@ -716,7 +716,7 @@ export default {
 }
 
 
-.el-multicascader__input {
+.multi-el-multicascader__input {
     .el-input__inner {
         color: transparent
     }
@@ -733,14 +733,14 @@ export default {
     }
 }
 
-.el-multicascader__search {
+.multi-el-multicascader__search {
     >input {
         color: #606266!important;
     }
 }
 
 
-.el-multicascader__label {
+.multi-el-multicascader__label {
     height: auto;
     position: absolute;
     line-height: normal;

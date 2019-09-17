@@ -493,8 +493,8 @@
           return (
             <li
               class={{
-                'el-cascader-menu__item': true,
-                'el-cascader-menu__item--extensible': item.children,
+                'multi-el-cascader-menu__item': true,
+                'multi-el-cascader-menu__item--extensible': item.children,
                 'is-active': item.value === activeValue[menuIndex],
                 'is-disabled': item.disabled
               }}
@@ -509,7 +509,7 @@
             >
               {multiple
                 ? <el-checkbox
-                  class="el-cascader-checkbox"
+                  class="multi-el-cascader-checkbox"
                   indeterminate={itemStatus === CHILD_SOME_CHECKED}
                   value={itemStatus === CHECKED || itemStatus === CHILD_ALL_CHECKED}
                   disabled={item.disabled || (!changeOnSelect && Array.isArray(item.children) && item.children.length > 0)} // 如果item是disabled的，或者只能选末级的
@@ -538,8 +538,8 @@
         return (
           <ul
             class={{
-              'el-cascader-menu': true,
-              'el-cascader-menu--flexible': isFlat
+              'multi-el-cascader-menu': true,
+              'multi-el-cascader-menu--flexible': isFlat
             }}
             {...hoverMenuEvent}
             style={menuStyle}
@@ -589,7 +589,7 @@
           <div
             v-show={visible}
             class={[
-              'el-cascader-menus el-popper',
+              'multi-el-cascader-menus el-popper',
               popperClass
             ]}
             ref="wrapper"
@@ -604,7 +604,7 @@
 </script>
 
 <style lang="less">
-.el-cascader-checkbox {
+.multi-el-cascader-checkbox {
   margin: 0;
 
   .el-checkbox__input {
