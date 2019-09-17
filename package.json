@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.1.5",
-    "element-ui": "^2.4.11",
+    "element-ui": "~2.8",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "vue": "2.5.16",
