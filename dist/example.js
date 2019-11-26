@@ -62,7 +62,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7476dee88035c9b07587"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d783114932b030c613ab"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -14835,7 +14835,7 @@ var _default2 = {
     },
     currentLabels: function currentLabels(value) {
       var inputLabel = this.showAllLevels ? value.join('/') : value[value.length - 1];
-      this.$refs.input.$refs.input.setAttribute('value', inputLabel);
+      this.$refs.input.$refs.input.setAttribute('value', inputLabel || '');
     },
     options: {
       deep: true,

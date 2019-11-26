@@ -12522,7 +12522,7 @@ var _default2 = {
     },
     currentLabels: function currentLabels(value) {
       var inputLabel = this.showAllLevels ? value.join('/') : value[value.length - 1];
-      this.$refs.input.$refs.input.setAttribute('value', inputLabel);
+      this.$refs.input.$refs.input.setAttribute('value', inputLabel || '');
     },
     options: {
       deep: true,

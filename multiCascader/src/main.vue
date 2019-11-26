@@ -389,7 +389,7 @@ export default {
         },
         currentLabels(value) {
             const inputLabel = this.showAllLevels ? value.join('/') : value[value.length - 1];
-            this.$refs.input.$refs.input.setAttribute('value', inputLabel);
+            this.$refs.input.$refs.input.setAttribute('value', inputLabel || '');
         },
         options: {
             deep: true,
